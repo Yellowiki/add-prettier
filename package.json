@@ -19,14 +19,17 @@
     "semi": false
   },
   "scripts": {
-    "format": "prettier-eslint --write '{src,test,app}/**/*.js'",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "format": "npm run -s test -- --write",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "prettier-eslint '{src,test,app}/**/*.js'"
   },
   "eslintConfig": {
     "extends": "airbnb",
     "rules": {
-      "semi": ["error", "never"]
+      "semi": [
+        "error",
+        "never"
+      ]
     }
   },
   "devDependencies": {
