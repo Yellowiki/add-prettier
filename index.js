@@ -5,10 +5,8 @@ const execa = require('execa')
 const ora = require('ora')
 
 async function addPrettier() {
-  const packageJSON = await fs.readJSON('package.json')
-
   const spinner = ora('Adding prettier').start()
-  await execa('yarn', ['add', '-D', 'prettier-eslint-cli@1'])
+  await execa('yarn', ['add', '-D', 'prettier-eslint-cli'])
 
   spinner.start('Adding ESLint')
   await execa('yarn', [
@@ -22,6 +20,8 @@ async function addPrettier() {
   ])
   spinner.succeed('Added prettier and ESLint')
 
+  spinner.start('Updating config')
+  const packageJSON = await fs.readJSON('package.json')
   packageJSON.prettier = {
     singleQuote: true,
     trailingComma: 'all',
@@ -39,7 +39,7 @@ async function addPrettier() {
   await fs.writeJSON('package.json', packageJSON, {
     spaces: 2,
   })
-  spinner.succeed('Wrote new config')
+  spinner.succeed('Updated config')
 }
 
 addPrettier().catch(e => {
