@@ -34,7 +34,7 @@ async function addPrettier() {
     },
   }
   packageJSON.scripts = packageJSON.scripts || {}
-  packageJSON.scripts.test = "prettier-eslint '{src,test,app}/**/*.js'"
+  packageJSON.scripts.lint = "prettier-eslint '{src,test,app}/**/*.js'"
   packageJSON.scripts.format = 'npm run -s test -- --write'
   await fs.writeJSON('package.json', packageJSON, {
     spaces: 2,
