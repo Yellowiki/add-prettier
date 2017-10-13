@@ -42,6 +42,6 @@ async function addPrettier() {
   spinner.succeed('Updated config')
 }
 
-addPrettier().catch(e => {
+addPrettier().catch((e) => {
   throw e
 })
