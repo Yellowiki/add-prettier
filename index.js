@@ -45,7 +45,7 @@ const tasks = new Listr([
       }
       packageJSON.scripts = packageJSON.scripts || {}
       packageJSON.scripts.lint = 'eslint .'
-      const lintCommand = `prettier${argv.eslint}` ? '-eslint' : ''
+      const lintCommand = argv.eslint ? 'prettier-eslint' : 'prettier'
       packageJSON.scripts.format = `${lintCommand} '{src,test,app}/**/*.{js,ts,css}' --write`
       await fs.writeJSON('package.json', packageJSON, {
         spaces: 2,
@@ -54,6 +54,6 @@ const tasks = new Listr([
   },
 ])
 
-tasks.run().catch(err => {
+tasks.run().catch((err) => {
   throw err
 })
