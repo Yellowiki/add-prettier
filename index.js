@@ -5,7 +5,7 @@ const execa = require('execa')
 const Listr = require('listr')
 const yargs = require('yargs')
 
-const argv = yargs.boolean('eslint').argv
+const { argv } = yargs.boolean('eslint').default('eslint', true)
 
 const tasks = new Listr([
   {
@@ -35,15 +35,18 @@ const tasks = new Listr([
         trailingComma: 'all',
         semi: false,
       }
-      packageJSON.eslintConfig = {
-        extends: 'airbnb',
-        rules: {
-          semi: ['error', 'never'],
-        },
+      if (argv.eslint) {
+        packageJSON.eslintConfig = {
+          extends: 'airbnb',
+          rules: {
+            semi: ['error', 'never'],
+          },
+        }
       }
       packageJSON.scripts = packageJSON.scripts || {}
       packageJSON.scripts.lint = 'eslint .'
-      packageJSON.scripts.format = "prettier-eslint '{src,test,app}/**/*.{js,ts,css}' --write"
+      const lintCommand = `prettier${argv.eslint}` ? '-eslint' : ''
+      packageJSON.scripts.format = `${lintCommand} '{src,test,app}/**/*.{js,ts,css}' --write`
       await fs.writeJSON('package.json', packageJSON, {
         spaces: 2,
       })
@@ -51,6 +54,6 @@ const tasks = new Listr([
   },
 ])
 
-tasks.run().catch((err) => {
+tasks.run().catch(err => {
   throw err
 })
