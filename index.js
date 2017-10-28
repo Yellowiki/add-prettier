@@ -3,6 +3,9 @@
 const fs = require('fs-extra')
 const execa = require('execa')
 const Listr = require('listr')
+const yargs = require('yargs')
+
+const argv = yargs.boolean('eslint').argv
 
 const tasks = new Listr([
   {
@@ -21,6 +24,7 @@ const tasks = new Listr([
         'eslint-plugin-import',
         'eslint-plugin-react',
       ]),
+    skip: () => !argv.eslint && '--no-eslint option specified',
   },
   {
     title: 'Update package.json',
