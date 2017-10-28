@@ -10,7 +10,7 @@ const { argv } = yargs.boolean('eslint').default('eslint', true)
 const tasks = new Listr([
   {
     title: 'Install Prettier',
-    task: () => execa('yarn', ['add', 'prettier-eslint-cli']),
+    task: () => execa('yarn', ['add', '-D', 'prettier-eslint-cli']),
   },
   {
     title: 'Install ESLint',
