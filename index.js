@@ -4,18 +4,21 @@ const fs = require('fs-extra')
 const execa = require('execa')
 const Listr = require('listr')
 const yargs = require('yargs')
+const path = require('path')
 
 const { argv } = yargs.boolean('eslint').default('eslint', true)
+
+const yarnPath = path.resolve(__dirname, 'node_modules/yarn/bin/yarn')
 
 const tasks = new Listr([
   {
     title: 'Install Prettier',
-    task: () => execa('yarn', ['add', '-D', 'prettier-eslint-cli']),
+    task: () => execa(yarnPath, ['add', '-D', 'prettier-eslint-cli']),
   },
   {
     title: 'Install ESLint',
     task: () =>
-      execa('yarn', [
+      execa(yarnPath, [
         'add',
         '-D',
         'eslint',
