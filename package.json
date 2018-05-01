@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "execa": "^0.8.0",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^6.0.0",
     "listr": "^0.13.0",
     "yargs": "^10.0.3",
     "yarn": "^1.2.1"
