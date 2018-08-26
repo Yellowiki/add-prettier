@@ -6,7 +6,7 @@
   "author": "GloriousYellow <yellowglorious@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "execa": "^0.8.0",
+    "execa": "^1.0.0",
     "fs-extra": "^4.0.2",
     "listr": "^0.13.0",
     "yargs": "^10.0.3",
